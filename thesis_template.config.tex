@@ -1,0 +1,159 @@
+% document configuration -------------------------------------------------------
+\documentclass[
+        pagesize,               % put paper size information into document
+        a4paper,                % use a5paper for ISO A5; use a4paper for ISO A4
+        pdftex,                 % PDF output
+        fontsize=12pt,          % font size
+        headsepline,            % use headinclude also! (see M. Kohm)
+        footsepline,            % use footinclude also! (see M. Kohm)
+        headinclude,            % count head to text body (not to margin)
+        footinclude,            % count foot to text body (not to margin)
+        BCOR8mm,                % set extra margin for book fixation
+        headsepline,            % line on the top
+        openany,                % allows chapters to occur on left hand pages
+        titlepage,              % show a title page
+        draft=false,            % show under-/overfull boxes
+        DIV=calc                % calculate a nice type area
+        %ngerman,                % German language support
+        %numbers=noendperiod     % no number at the end (German DUDEN)
+]{scrbook}
+% ------------------------------------------------------------------------------
+
+% lang config ------------------------------------------------------------------
+%\usepackage{CJKutf8}                         % Japanese language support
+%\usepackage[ngerman]{babel}                  % German language support
+%\usepackage{bibgerm}                         % German bibliography support
+%\usepackage[babel,german=quotes]{csquotes}   % German language support
+% lang config ------------------------------------------------------------------
+
+% basic config -----------------------------------------------------------------
+\usepackage{tocloft}                          % Tweaks for large ToCs
+\cftsetpnumwidth{2em}
+
+%\input{lib/resources/config/default}          % Default config
+% basic config -----------------------------------------------------------------
+
+% local config -----------------------------------------------------------------
+\usepackage{scrhack}                          % Fix some scrbook issues
+\usepackage[numbers,square,longnamesfirst]{natbib}  % Bibliography: style
+\definecolor{LinkColor}{rgb}{0,0,0}           % Link color
+\definecolor{MarginColor}{rgb}{.29,.03,.06}   % Link color
+\usepackage[printonlyused,withpage]{acronym}  % Acronyms
+\usepackage[Sonny]{fncychap}                  % Nice chapter header
+\usepackage{wallpaper}                        % To show an icon on the first page
+\usepackage{minitoc}                          % ToC for chapters
+\dominitoc[n]                                 % No caption for mini ToCs
+\addtokomafont{sectioning}{\rmfamily}         % Serifs in headings
+\ChNameVar{\Large\rmfamily}                   % Fancy chapter with serifs
+\ChTitleVar{\Large\rmfamily}                  % Fancy chapter with serifs
+\renewcommand*{\acsfont}[1]{{\rmfamily{#1}}}
+\renewcommand{\lstlistlistingname}{List of Algorithms}
+\renewcommand{\lstlistingname}{Algorithm}
+\usepackage{mathptmx}                % Nicer fonts (for all) - times
+%\usepackage[clearempty]{titlesec}    % Suppress header and footer for empty pages
+\usepackage{makeidx}                 % Make an index
+\makeindex                           % Make an index
+\newlength\cornerXoffset
+\newlength\cornerYoffset
+\setlength\cornerXoffset{0cm}        % X
+\setlength\cornerYoffset{2cm}        % Y
+\newcommand\ThisLROffsetCornerWallPaper[2]{%
+  \AddToShipoutPicture*{%
+    \AtPageLowerLeft{%
+      \parbox[b]{\paperwidth-\cornerXoffset}{%
+        \hfill \includegraphics[width=#1\paperwidth,height=#1\paperheight,%
+        keepaspectratio]{#2}%
+        \vspace{\cornerYoffset}\null
+      }
+    }
+  }
+}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+% ------------------------------------------------------------------------------
+
+
+% fix for old tex installations ------------------------------------------------
+% ------------------------------------------------------------------------------
+
+
+% page layout ------------------------------------------------------------------
+\usepackage{geometry}
+\geometry{a4paper, bottom=4cm}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.07}         % allow minimal text w. figs
+\renewcommand{\floatpagefraction}{0.7}     % require fuller float pages
+\renewcommand{\dblfloatpagefraction}{0.7}  % require fuller float pages
+\renewcommand{\dbltopfraction}{0.9}        % fit big float above 2-col. text
+\renewcommand{\textfloatsep}{5mm}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}                % 2 may work better
+\setcounter{dbltopnumber}{2}               % for 2-column pages
+
+%\ChNameVar{\vspace*{-1in}\Large\sf}
+%\ChNumVar{\vspace*{-1in}\Huge}
+%\ChTitleVar{\vspace*{-1in}\Large\sf}
+%\ChRuleWidth{0.5pt}
+%\ChNameUpperCase
+
+%\makeatletter
+%\def\@makeschapterhead#1{%
+%  \vspace*{0\p@}
+%  {\parindent \z@ \raggedright
+%    \normalfont
+%    \interlinepenalty\@M
+%    \DOTIS{#1}
+%    \vskip 0\p@
+%  }}
+%\makeatother
+% ------------------------------------------------------------------------------
+
+% hyperlinks (almost last package) --------------------------------------------
+\usepackage[pdftex,                   % Hyperlinks in PDFs
+raiselinks=true,			          % calculate real height of the link
+breaklinks,                           % break links
+%backref=page,                         % backlinks in bibliography (section, slide, page, none)
+%pagebackref=true,                     % backlinks in bibliography
+hyperindex=true,                      % backlinkex index
+linktocpage=true,                     % ToC links pages
+bookmarks=true,                       % Bookmarks for PDF viewers
+bookmarksopen=true,                   % Open bookmarks
+bookmarksopenlevel=2,                 % How many levels to open
+bookmarksnumbered=true,               % Numbers in the bookmarks
+bookmarkstype=toc,                    % Type of bookmark
+plainpages=false,                     % Anchors even on plain pages?
+pageanchor=true,                      % Pages are linkable
+pdfstartview=FitH,                    % Open document with Fit Width
+pdfpagelabels=true,                   % set PDF page labels
+pdfpagemode=UseOutlines,              % Show bookmarks in viewer
+colorlinks,                           % Show colored links
+linkcolor=LinkColor,                  % Link color
+urlcolor=LinkColor,                   % URL color
+anchorcolor=LinkColor,                % Anchor color
+citecolor=LinkColor,                  % Cite color
+menucolor=LinkColor,                  % Menu color
+hypertexnames=true                    % Whatever ;)
+]{hyperref}                           % Use hyperlinks
+%\renewcommand*{\backref}[1]{[cited at page #1]} % Show formatted backlinks
+\usepackage{bookmark}                         % Manually add PDF bookmarks
+% ------------------------------------------------------------------------------
+
+% glossary (last package) ----------------------------------------------------
+\usepackage[xindy,nonumberlist,toc]{glossaries}
+\input{\metaFilename.glos.tex}
+\renewcommand*{\glossaryname}{Glossary}
+\setglossarystyle{altlist}
+\renewcommand*{\glsgroupskip}{}
+%fixme: the glossary moves the minitocs to the wrong chapters
+\renewcommand*{\gls}[1]{{#1}}
+%\makeglossaries
+% ------------------------------------------------------------------------------
+
+% meta data --------------------------------------------------------------------
+\input{\metaFilename.meta}
+
+%\input{lib/resources/config/pdfmetadata}
+% ------------------------------------------------------------------------------
