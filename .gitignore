@@ -1,4 +1,16 @@
 tmp
 thesis_template.pdf
 *.log
-
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc*
+*.tcp
+*.toc
+*.tps
+.DS_Store
